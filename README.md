@@ -80,7 +80,9 @@ $ git --version
 ## 4. 프로젝트 폴더 구조
 
 ```bash
-$ tree
+$ sudo apt update
+  sudo install tree
+  tree
 [tree 명령이 없다면 ls -R 출력 붙여넣기]
 ```
 
@@ -563,10 +565,17 @@ For more examples and ideas, visit:
 
 ```bash
 $ docker run -dit --name ubuntu-lab ubuntu:22.04 bash
-[실제 출력 붙여넣기]
+[Unable to find image 'ubuntu:22.04' locally
+22.04: Pulling from library/ubuntu
+0626d3cc316c: Pull complete 
+ae52aad3a114: Download complete 
+Digest: sha256:076e7bf82319619f28dd0aa9c02ab34b055ad37100395b4f49a2ffba04fb5e11
+Status: Downloaded newer image for ubuntu:22.04
+42adc3e99e6ffa60f5d2619a52f7146f8f8c6c02933383e4d898edc5673a1a3e]
 
 $ docker ps
-[실제 출력 붙여넣기]
+[CONTAINER ID   IMAGE          COMMAND   CREATED          STATUS          PORTS     NAMES
+42adc3e99e6f   ubuntu:22.04   "bash"    42 seconds ago   Up 41 seconds             ubuntu-lab]
 ```
 
 ### 10-3. ubuntu 컨테이너 내부 진입 및 명령 실행
@@ -574,10 +583,10 @@ $ docker ps
 ```bash
 $ docker exec -it ubuntu-lab bash
 root@[컨테이너ID]:/# pwd
-[실제 출력 붙여넣기]
+[/]
 
 root@[컨테이너ID]:/# ls
-[실제 출력 붙여넣기]
+[bin  boot  dev  etc  home  lib  lib32  lib64  libx32  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var]
 
 root@[컨테이너ID]:/# echo "hello from ubuntu container"
 hello from ubuntu container
@@ -600,10 +609,21 @@ exit
 
 ```bash
 $ docker stop ubuntu-lab
-[실제 출력 붙여넣기]
+[ubuntu-lab]
+
+$ docker ps -a
+[CONTAINER ID   IMAGE          COMMAND    CREATED          STATUS                        PORTS     NAMES
+42adc3e99e6f   ubuntu:22.04   "bash"     16 minutes ago   Exited (137) 28 seconds ago             ubuntu-lab
+60a13240a878   hello-world    "/hello"   13 hours ago     Exited (0) 13 hours ago                 stupefied_ganguly
+e01cbfb0bfba   hello-world    "/hello"   13 hours ago     Exited (0) 13 hours ago                 angry_bhaskara]
 
 $ docker rm ubuntu-lab
-[실제 출력 붙여넣기]
+[ubuntu-lab]
+
+$ docker ps -a
+[CONTAINER ID   IMAGE         COMMAND    CREATED        STATUS                    PORTS     NAMES
+60a13240a878   hello-world   "/hello"   13 hours ago   Exited (0) 13 hours ago             stupefied_ganguly
+e01cbfb0bfba   hello-world   "/hello"   13 hours ago   Exited (0) 13 hours ago             angry_bhaskara]
 ```
 
 ---
