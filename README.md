@@ -16,8 +16,8 @@ Github와 Codyssey를 연동하기 위해 만들어진 Repository입니다.
 | 항목 | 내용 |
 |---|---|
 | OS |  Ubunto 22.04 LTS(WSL2), Windows WSL  |
-| Shell | bash,  PowerShell] |
-| Terminal | Windows Terminal, VSCode Terminal] |
+| Shell | bash,  PowerShell |
+| Terminal | Windows Terminal, VSCode Terminal |
 | Docker | 아래 명령 결과 참고 |
 | Git | 아래 명령 결과 참고 |
 
@@ -283,14 +283,118 @@ Linux/Unix 계열 파일 권한은 다음 세 그룹으로 나뉩니다.
 
 ```bash
 $ docker --version
-[실제 출력 붙여넣기]
+[Docker version 29.9.2, build a82e528]
 ```
 
 ### 8-2. Docker 데몬 동작 확인
 
 ```bash
 $ docker info
-[실제 출력 붙여넣기]
+[Client:
+ Version:    29.9.2
+ Context:    default
+ Debug Mode: false
+ Plugins:
+  agent: Docker AI Agent Runner (Docker Inc.)
+    Version:  v1.152.0
+    Path:     /usr/local/lib/docker/cli-plugins/docker-agent
+  ai: Docker AI Agent - Ask Gordon (Docker Inc.)
+    Version:  v1.33.0
+    Path:     /usr/local/lib/docker/cli-plugins/docker-ai
+  buildx: Docker Buildx (Docker Inc.)
+    Version:  v0.38.1
+    Path:     /usr/local/lib/docker/cli-plugins/docker-buildx
+  compose: Docker Compose (Docker Inc.)
+    Version:  v5.6.1
+    Path:     /usr/local/lib/docker/cli-plugins/docker-compose
+  debug: Get a shell into any image or container (Docker Inc.)
+    Version:  0.49.0
+    Path:     /usr/local/lib/docker/cli-plugins/docker-debug
+  desktop: Docker Desktop commands (Docker Inc.)
+    Version:  4.98.0
+    Path:     /usr/local/lib/docker/cli-plugins/docker-desktop
+  dhi: CLI for managing Docker Hardened Images (Docker Inc.)
+    Version:  v0.0.9
+    Path:     /usr/local/lib/docker/cli-plugins/docker-dhi
+  extension: Manages Docker extensions (Docker Inc.)
+    Version:  v0.2.32
+    Path:     /usr/local/lib/docker/cli-plugins/docker-extension
+  init: Creates Docker-related starter files for your project (Docker Inc.)
+    Version:  v1.4.1
+    Path:     /usr/local/lib/docker/cli-plugins/docker-init
+  mcp: Docker MCP Plugin (Docker Inc.)
+    Version:  v0.44.2
+    Path:     /usr/local/lib/docker/cli-plugins/docker-mcp
+  model: Docker Model Runner (Docker Inc.)
+    Version:  v1.2.9
+    Path:     /usr/local/lib/docker/cli-plugins/docker-model
+  offload: Docker Offload (Docker Inc.)
+    Version:  v0.7.35
+    Path:     /usr/local/lib/docker/cli-plugins/docker-offload
+  pass: Docker Pass Secrets Manager Plugin (beta) (Docker Inc.)
+    Version:  v0.3.2
+    Path:     /usr/local/lib/docker/cli-plugins/docker-pass
+  sandbox: "docker sandbox" is deprecated, use Docker Sandboxes instead (Docker Inc.)
+    Version:  v0.13.0
+    Path:     /usr/local/lib/docker/cli-plugins/docker-sandbox
+  scout: Docker Scout (Docker Inc.)
+    Version:  v1.27.0
+    Path:     /usr/local/lib/docker/cli-plugins/docker-scout
+
+Server:
+ Containers: 7
+  Running: 1
+  Paused: 0
+  Stopped: 6
+ Images: 2
+ Server Version: 29.9.2
+ Storage Driver: overlayfs
+  driver-type: io.containerd.snapshotter.v1
+ Logging Driver: local
+ Cgroup Driver: cgroupfs
+ Cgroup Version: 2
+ Plugins:
+  Volume: local
+  Network: bridge host ipvlan macvlan null overlay
+  Log: awslogs fluentd gcplogs gelf journald json-file local splunk syslog
+ CDI spec directories:
+  /etc/cdi
+  /var/run/cdi
+ Discovered Devices:
+  cdi: docker.com/gpu=webgpu
+ Swarm: inactive
+ Runtimes: nvidia runc io.containerd.runc.v2
+ Default Runtime: runc
+ Init Binary: docker-init
+ containerd version: b7a25261e029d68978bbf290df0a62fc819b3c51
+ runc version: v1.5.2-0-g29dd3dc2
+ init version: de40ad0
+ Security Options:
+  seccomp
+   Profile: builtin
+  cgroupns
+ Kernel Version: 6.18.54.1-microsoft-standard-WSL2
+ Operating System: Docker Desktop
+ OSType: linux
+ Architecture: x86_64
+ CPUs: 24
+ Total Memory: 15.25GiB
+ Name: docker-desktop
+ ID: b44a5642-5486-423b-bf12-8cdfe6b1ecff
+ Docker Root Dir: /var/lib/docker
+ Debug Mode: false
+ HTTP Proxy: http.docker.internal:3128
+ HTTPS Proxy: http.docker.internal:3128
+ No Proxy: hubproxy.docker.internal
+ Labels:
+  com.docker.desktop.address=unix:///var/run/docker-cli.sock
+ Experimental: false
+ Insecure Registries:
+  hubproxy.docker.internal:5555
+  127.0.0.0/8
+  ::1/128
+ Live Restore Enabled: false
+ Firewall Backend: iptables]
 ```
 
 확인 결과 Docker Client와 Server 정보가 출력되어 Docker 데몬이 정상 동작함을 확인했습니다.
@@ -302,64 +406,123 @@ $ docker info
 ### 9-1. 이미지 다운로드
 
 ```bash
-$ docker pull nginx:alpine
-[실제 출력 붙여넣기]
+$ docker pull nginx
+[Using default tag: latest
+latest: Pulling from library/nginx
+Digest: sha256:165ddde8751e75a1c907d24ef10d9f6deb08b57e0fe56caf67512486aff76d82
+Status: Image is up to date for nginx:latest
+docker.io/library/nginx:latest]
 ```
 
 ### 9-2. 이미지 목록 확인
 
 ```bash
 $ docker images
-[실제 출력 붙여넣기]
+[                                                                                   i Info →   U  In Use
+IMAGE                ID             DISK USAGE   CONTENT SIZE   EXTRA
+hello-world:latest   c567b231f656       25.9kB         9.49kB    U   
+nginx:latest         165ddde8751e        243MB         66.8MB    U   ]
 ```
 
 ### 9-3. 컨테이너 실행
 
 ```bash
-$ docker run -d --name nginx-basic -p 8088:80 nginx:alpine
-[실제 출력 붙여넣기]
-```
+$ docker run -d --name my-nginx -p 8080:80 nginx
+[docker: Error response from daemon: Conflict. The container name "/my-nginx" is already in use by container "0efa9915db45f3f42a7ee73ef7c912dfaf4d2deef4dcd3a38ee32853a9ec13a0". You have to remove (or rename) that container to be able to reuse that name.
 
+Run 'docker run --help' for more information
+yucho8990@GNIA-C201-H04:~$ docker ps -a
+CONTAINER ID   IMAGE         COMMAND                  CREATED              STATUS                   PORTS                                           NAMES
+0efa9915db45   nginx         "/docker-entrypoint.…"   About a minute ago   Up About a minute        0.0.0.0:58806->8080/tcp, [::]:58806->8080/tcp   my-nginx
+366a37300c35   nginx         "/docker-entrypoint.…"   3 hours ago          Up 3 hours               0.0.0.0:8080->80/tcp, [::]:8080->80/tcp         sleepy_mcclintock
+cd4e6730122a   nginx         "/docker-entrypoint.…"   3 hours ago          Created                                                                  amazing_thompson
+4b58757a5745   hello-world   "/hello"                 4 hours ago          Exited (0) 4 hours ago                                                   blissful_shannon
+8c7f20ba5bf1   nginx         "/docker-entrypoint.…"   4 hours ago          Created                                                                  wonderful_wu
+69ea6b15b51d   nginx         "/docker-entrypoint.…"   4 hours ago          Exited (0) 3 hours ago                                                   elegant_blackburn
+c8b261222364   hello-world   "/hello"                 4 hours ago          Exited (0) 4 hours ago                                                   intelligent_engelbart
+a2a0e3e33f7f   hello-world   "/hello"                 4 hours ago          Exited (0) 4 hours ago                                                   lucid_joliot]
+```
+### 9-3-1. 이미 my-nginx라는 이름의 컨테이너가 존재 -> stop(정리)
+``` 
+docker stop my-nginx #기존my-nginx(stop)
+docker stop sleepy_mcclintock #기존sleepy_mcclintock(stop)
+```
+### 9-3-2. 기존 컨테이너 삭제
+```
+docker rm $(docker ps -aq) #모든컨테이너삭제
+docker ps -a #확인
+[CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES]
+```
+### 9-3-2. 다시 실행
+```
+$ docker run -d --name my-nginx -p 8080:80 nginx
+[fd1ce6dffd63b572d27dc0dff75e20248061ed6f668cd3903f2f0be30aab3ad1]
+```
 ### 9-4. 실행 중인 컨테이너 확인
 
 ```bash
 $ docker ps
-[실제 출력 붙여넣기]
+[CONTAINER ID   IMAGE     COMMAND                  CREATED              STATUS              PORTS                                     NAMES
+fd1ce6dffd63   nginx     "/docker-entrypoint.…"   About a minute ago   Up About a minute   0.0.0.0:8080->80/tcp, [::]:8080->80/tcp   my-nginx]
 ```
 
 ### 9-5. 컨테이너 로그 확인
 
 ```bash
-$ docker logs nginx-basic
-[실제 출력 붙여넣기]
+$ docker logs my-nginx
+[/docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
+/docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/
+/docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh
+10-listen-on-ipv6-by-default.sh: info: Getting the checksum of /etc/nginx/conf.d/default.conf
+10-listen-on-ipv6-by-default.sh: info: Enabled listen on IPv6 in /etc/nginx/conf.d/default.conf
+/docker-entrypoint.sh: Sourcing /docker-entrypoint.d/15-local-resolvers.envsh
+/docker-entrypoint.sh: Launching /docker-entrypoint.d/20-envsubst-on-templates.sh
+/docker-entrypoint.sh: Launching /docker-entrypoint.d/30-tune-worker-processes.sh
+/docker-entrypoint.sh: Configuration complete; ready for start up
+2026/11/07 09:31:28 [notice] 1#1: using the "epoll" event method
+2026/11/07 09:31:28 [notice] 1#1: nginx/1.31.8
+2026/11/07 09:31:28 [notice] 1#1: built by gcc 14.2.0 (Debian 14.2.0-19) 
+2026/11/07 09:31:28 [notice] 1#1: OS: Linux 6.18.54.1-microsoft-standard-WSL2
+2026/11/07 09:31:28 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+2026/11/07 09:31:28 [notice] 1#1: start worker processes
+2026/11/07 09:31:28 [notice] 1#1: start worker process 29
+2026/11/07 09:31:28 [notice] 1#1: start worker process 30
+2026/11/07 09:31:28 [notice] 1#1: start worker process 31
+2026/11/07 09:31:28 [notice] 1#1: start worker process 32
+2026/11/07 09:31:28 [notice] 1#1: start worker process 33]
 ```
 
 ### 9-6. 컨테이너 리소스 확인
 
 ```bash
-$ docker stats nginx-basic --no-stream
-[실제 출력 붙여넣기]
+$ docker stats my-nginx --no-stream
+[CONTAINER ID   NAME       CPU %     MEM USAGE / LIMIT     MEM %     NET I/O         BLOCK I/O     PIDS
+fd1ce6dffd63   my-nginx   0.00%     21.11MiB / 15.25GiB   0.14%     1.17kB / 126B   0B / 12.3kB   25]
+$ Ctrl + C
 ```
 
 ### 9-7. 컨테이너 중지
 
 ```bash
-$ docker stop nginx-basic
-[실제 출력 붙여넣기]
+$ docker stop my-nginx
+[my-nginx]
 ```
 
 ### 9-8. 전체 컨테이너 목록 확인
 
 ```bash
 $ docker ps -a
-[실제 출력 붙여넣기]
+[CONTAINER ID   IMAGE     COMMAND                  CREATED         STATUS                      PORTS     NAMES
+fd1ce6dffd63   nginx     "/docker-entrypoint.…"   9 minutes ago   Exited (0) 15 seconds ago             my-nginx]
 ```
 
 ### 9-9. 컨테이너 삭제
 
 ```bash
-$ docker rm nginx-basic
-[실제 출력 붙여넣기]
+$ docker rm my-nginx
+[my-nginx]
+$ docker ps
+[CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES]
 ```
 
 ---
@@ -370,7 +533,26 @@ $ docker rm nginx-basic
 
 ```bash
 $ docker run hello-world
-[실제 출력 붙여넣기]
+[Hello from Docker!
+This message shows that your installation appears to be working correctly.
+
+To generate this message, Docker took the following steps:
+ 1. The Docker client contacted the Docker daemon.
+ 2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
+    (amd64)
+ 3. The Docker daemon created a new container from that image which runs the
+    executable that produces the output you are currently reading.
+ 4. The Docker daemon streamed that output to the Docker client, which sent it
+    to your terminal.
+
+To try something more ambitious, you can run an Ubuntu container with:
+ $ docker run -it ubuntu bash
+
+Share images, automate workflows, and more with a free Docker ID:
+ https://hub.docker.com/
+
+For more examples and ideas, visit:
+ https://docs.docker.com/get-started/]
 ```
 
 `hello-world` 컨테이너 실행을 통해 Docker가 이미지를 내려받고 컨테이너를 실행할 수 있음을 확인했습니다.
