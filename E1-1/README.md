@@ -91,7 +91,14 @@ $ sudo apt update
 .
 ├── Dockerfile
 ├── README.md
+├── TestDir
+│   ├── empty.txt
+│   ├── hello.txt
+│   └── renamed.txt
+├── permissionsDir
+│   └── file.txt
 ├── screenshot
+│   ├── VSCode_GitHub.png
 │   ├── localhost_Bindmount.png
 │   └── locatlhost80.png
 └── site
