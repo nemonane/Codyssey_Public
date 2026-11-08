@@ -17,7 +17,7 @@ Github와 Codyssey를 연동하기 위해 만들어진 Repository입니다.
 |---|---|
 | OS |  Ubunto 22.04 LTS(WSL2), Windows WSL  |
 | Shell | bash,  PowerShell |
-| Terminal | Windows Terminal, VSCode Terminal |
+| Terminal | VSCode Terminal |
 | Docker | 아래 명령 결과 참고 |
 | Git | 아래 명령 결과 참고 |
 
@@ -83,21 +83,19 @@ $ git --version
 $ sudo apt update
   sudo install tree
   tree
-[tree 명령이 없다면 ls -R 출력 붙여넣기]
 ```
 
-예상 구조:
+출력:
 
 ```text
 .
-├── README.md
 ├── Dockerfile
-├── site
-│   └── index.html
-├── evidence
-│   ├── screenshots
-│   └── logs
-└── notes
+├── README.md
+├── screenshot
+│   ├── localhost_Bindmount.png
+│   └── locatlhost80.png
+└── site
+    └── index.html
 ```
 
 ---
@@ -108,17 +106,23 @@ $ sudo apt update
 
 ```bash
 $ pwd
-[실제 출력 붙여넣기]
+[/mnt/d/codyssey_01/Codyssey_Public/e1-1]
 ```
 
 ### 5-2. 목록 확인
 
 ```bash
 $ ls
-[실제 출력 붙여넣기]
+[Dockerfile  README.md  screenshot  site]
 
 $ ls -la
-[실제 출력 붙여넣기]
+[total 36
+drwxrwxrwx 1 yucho8990 yucho8990  4096 Nov  8 09:30 .
+drwxrwxrwx 1 yucho8990 yucho8990  4096 Nov  8 08:43 ..
+-rwxrwxrwx 1 yucho8990 yucho8990   232 Nov  8 10:01 Dockerfile
+-rwxrwxrwx 1 yucho8990 yucho8990 35893 Nov  8 10:01 README.md
+drwxrwxrwx 1 yucho8990 yucho8990  4096 Nov  8 10:00 screenshot
+drwxrwxrwx 1 yucho8990 yucho8990  4096 Nov  8 09:04 site]
 ```
 
 ### 5-3. 디렉토리 이동
@@ -126,52 +130,65 @@ $ ls -la
 ```bash
 $ cd site
 $ pwd
-[실제 출력 붙여넣기]
+[/mnt/d/codyssey_01/Codyssey_Public/e1-1/site]
 
 $ cd ..
 $ pwd
-[실제 출력 붙여넣기]
+[/mnt/d/codyssey_01/Codyssey_Public/e1-1]
 ```
 
 ### 5-4. 디렉토리 및 파일 생성
 
 ```bash
-$ mkdir terminal-practice
-$ touch terminal-practice/empty.txt
-$ ls -la terminal-practice
-[실제 출력 붙여넣기]
+$ mkdir TestDir
+$ touch TestDir/empty.txt
+$ ls -la TestDir
+[total 0
+drwxrwxrwx 1 yucho8990 yucho8990 4096 Nov  8 10:14 .
+drwxrwxrwx 1 yucho8990 yucho8990 4096 Nov  8 10:13 ..
+-rwxrwxrwx 1 yucho8990 yucho8990    0 Nov  8 10:14 empty.txt]
 ```
 
 ### 5-5. 파일 내용 작성 및 확인
 
 ```bash
-$ echo "hello terminal" > terminal-practice/hello.txt
-$ cat terminal-practice/hello.txt
-hello terminal
+$ echo "hello terminal" > TestDir/hello.txt
+$ cat TestDir/hello.txt
+[hello terminal]
 ```
 
 ### 5-6. 파일 복사
 
 ```bash
-$ cp terminal-practice/hello.txt terminal-practice/hello-copy.txt
-$ ls -la terminal-practice
-[실제 출력 붙여넣기]
+$ cp TestDir/hello.txt TestDir/hello-copy.txt
+$ ls -la TestDir
+[total 0
+drwxrwxrwx 1 yucho8990 yucho8990 4096 Nov  8 10:18 .
+drwxrwxrwx 1 yucho8990 yucho8990 4096 Nov  8 10:13 ..
+-rwxrwxrwx 1 yucho8990 yucho8990    0 Nov  8 10:14 empty.txt
+-rwxrwxrwx 1 yucho8990 yucho8990   15 Nov  8 10:18 hello-copy.txt
+-rwxrwxrwx 1 yucho8990 yucho8990   15 Nov  8 10:17 hello.txt]
 ```
 
 ### 5-7. 파일 이동 및 이름 변경
 
 ```bash
-$ mv terminal-practice/hello-copy.txt terminal-practice/renamed.txt
-$ ls -la terminal-practice
+$ mv TestDir/hello-copy.txt TestDir/renamed.txt
+$ ls -la TestDir
 [실제 출력 붙여넣기]
 ```
 
 ### 5-8. 파일 삭제
 
 ```bash
-$ rm terminal-practice/renamed.txt
-$ ls -la terminal-practice
-[실제 출력 붙여넣기]
+$ rm TestDir/renamed.txt
+$ ls -la TestDir
+[total 0
+drwxrwxrwx 1 yucho8990 yucho8990 4096 Nov  8 10:20 .
+drwxrwxrwx 1 yucho8990 yucho8990 4096 Nov  8 10:13 ..
+-rwxrwxrwx 1 yucho8990 yucho8990    0 Nov  8 10:14 empty.txt
+-rwxrwxrwx 1 yucho8990 yucho8990   15 Nov  8 10:17 hello.txt
+-rwxrwxrwx 1 yucho8990 yucho8990   15 Nov  8 10:18 renamed.txt]
 ```
 
 ---
@@ -185,9 +202,8 @@ $ ls -la terminal-practice
 예시:
 
 ```text
-/home/user/dev-workstation-assignment/site/index.html
+/E1-1/site/index.html
 ```
-
 현재 위치와 관계없이 항상 같은 위치를 가리킵니다.
 
 ### 상대 경로
