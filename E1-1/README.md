@@ -175,7 +175,11 @@ drwxrwxrwx 1 yucho8990 yucho8990 4096 Nov  8 10:13 ..
 ```bash
 $ mv TestDir/hello-copy.txt TestDir/renamed.txt
 $ ls -la TestDir
-[실제 출력 붙여넣기]
+[drwxrwxrwx 1 yucho8990 yucho8990 4096 Nov  8 10:20 .
+drwxrwxrwx 1 yucho8990 yucho8990 4096 Nov  8 10:13 ..
+-rwxrwxrwx 1 yucho8990 yucho8990    0 Nov  8 10:14 empty.txt
+-rwxrwxrwx 1 yucho8990 yucho8990   15 Nov  8 10:17 hello.txt
+-rwxrwxrwx 1 yucho8990 yucho8990   15 Nov  8 10:18 renamed.txt]
 ```
 
 ### 5-8. 파일 삭제
@@ -250,7 +254,7 @@ $ ls -l permissionsDir/file.txt
 ```
 윈도우 os와 리눅스 명령어 사이의 호환문제 때문에 결과를 볼수 없었다. 
 -----
- ==홈디렉토리로 이동하여 재작업 하였음==
+ ==(트러블 슈팅)홈디렉토리로 이동하여 재작업 하였음==
 ``` bash
 $ cd ~
 $ touch test.txt
@@ -481,18 +485,18 @@ cd4e6730122a   nginx         "/docker-entrypoint.…"   3 hours ago          Cre
 c8b261222364   hello-world   "/hello"                 4 hours ago          Exited (0) 4 hours ago                                                   intelligent_engelbart
 a2a0e3e33f7f   hello-world   "/hello"                 4 hours ago          Exited (0) 4 hours ago                                                   lucid_joliot]
 ```
-### 9-3-1. 이미 my-nginx라는 이름의 컨테이너가 존재 -> stop(정리)
+### (트러블 슈팅) 9-3-1. 이미 my-nginx라는 이름의 컨테이너가 존재 -> stop(정리)
 ``` 
 docker stop my-nginx #기존my-nginx(stop)
 docker stop sleepy_mcclintock #기존sleepy_mcclintock(stop)
 ```
-### 9-3-2. 기존 컨테이너 삭제
+### (트러블 슈팅) 9-3-2. 기존 컨테이너 삭제
 ```
 docker rm $(docker ps -aq) #모든컨테이너삭제
 docker ps -a #확인
 [CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES]
 ```
-### 9-3-2. 다시 실행
+### (트러블 슈팅) 9-3-2. 다시 실행
 ```
 $ docker run -d --name my-nginx -p 8080:80 nginx
 [fd1ce6dffd63b572d27dc0dff75e20248061ed6f668cd3903f2f0be30aab3ad1]
@@ -957,5 +961,10 @@ EOF
 스크린샷:
 
 ![포트 매핑 접속 증거](./screenshot/localhost_Bindmount.png)
+
+### 18. VSCode GitHub 연동 증거 
+
+스크린샷:
+![VSCode GitHub 연동증거](./screenshot/VSCode_GitHub.png)
 
 ---
