@@ -226,37 +226,58 @@ drwxrwxrwx 1 yucho8990 yucho8990 4096 Nov  8 10:13 ..
 ### 7-1. 실습 파일 생성
 
 ```bash
-$ mkdir -p permission-practice
-$ echo "permission test" > permission-practice/file.txt
-$ ls -l permission-practice/file.txt
-[실제 출력 붙여넣기]
+$ mkdir -p permissionsDir
+$ echo "permission test" > permissionsDir/file.txt
+$ ls -l permissionsDir/file.txt
+[   디렉터리: D:\codyssey_01\Codyssey_Public\e1-1\permissionsDir
+
+
+Mode                 LastWriteTime         Length Name                                                                                                                                                  
+----                 -------------         ------ ----                                                                                                                                                  
+-a----      2026-11-08  오전 11:55             36 file.txt]
 ```
 
 ### 7-2. 파일 권한 변경 전/후 비교
 
 ```bash
-$ chmod 644 permission-practice/file.txt
-$ ls -l permission-practice/file.txt
-[실제 출력 붙여넣기]
+$ chmod 644 permissionsDir/file.txt
+$ ls -l permissionsDir/file.txt
+[-rwxrwxrwx 1 yucho8990 yucho8990 36 Nov  8 11:55 permissionsDir/file.txt]
 
-$ chmod 755 permission-practice/file.txt
-$ ls -l permission-practice/file.txt
-[실제 출력 붙여넣기]
+$ chmod 755 permissionsDir/file.txt
+$ ls -l permissionsDir/file.txt
+[-rwxrwxrwx 1 yucho8990 yucho8990 36 Nov  8 11:55 permissionsDir/file.txt]
+```
+윈도우 os와 리눅스 명령어 사이의 호환문제 때문에 결과를 볼수 없었다. 
+-----
+ ==홈디렉토리로 이동하여 재작업 하였음==
+``` bash
+$ cd ~
+$ touch test.txt
+$ chmod 644 test.txt
+$ ls -l test.txt
+[-rw-r--r-- 1 yucho8990 yucho8990 0 Nov  8 12:18 test.txt]
+
+$ chmod 755 test.txt
+$ ls -l test.txt 
+[-rwxr-xr-x 1 yucho8990 yucho8990 0 Nov  8 12:18 test.txt]
 ```
 
 ### 7-3. 디렉토리 권한 변경 전/후 비교
-
+==역시 os 충돌 문제로 홈디렉토리에서 작업하였음.==
 ```bash
-$ ls -ld permission-practice
-[실제 출력 붙여넣기]
+$ cd ~
+$ mkdir testDir
+$ ls -ld testDir
+[drwxr-xr-x 2 yucho8990 yucho8990 4096 Nov  8 12:35 testDir]
 
-$ chmod 755 permission-practice
-$ ls -ld permission-practice
-[실제 출력 붙여넣기]
+$ chmod 755 testDir
+$ ls -ld testDir
+[drwxr-xr-x 2 yucho8990 yucho8990 4096 Nov  8 12:35 testDir]
 
-$ chmod 700 permission-practice
-$ ls -ld permission-practice
-[실제 출력 붙여넣기]
+$ chmod 700 testDir
+$ ls -ld testDir
+[drwx------ 2 yucho8990 yucho8990 4096 Nov  8 12:35 testDir]
 ```
 
 ### 7-4. 권한 의미 정리
