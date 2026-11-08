@@ -701,28 +701,67 @@ COPY site/ /usr/share/nginx/html/
 
 ```bash
 $ docker build -t dev-workstation-web:1.0 .
-[실제 출력 붙여넣기]
+[[+] Building 4.6s (7/7) FINISHED                                                                                                                                                    docker:desktop-linux
+ => [internal] load build definition from Dockerfile                                                                                                                                                0.0s
+ => => transferring dockerfile: 271B                                                                                                                                                                0.0s
+ => [internal] load metadata for docker.io/library/nginx:alpine                                                                                                                                     2.0s
+ => [internal] load .dockerignore                                                                                                                                                                   0.0s
+ => => transferring context: 2B                                                                                                                                                                     0.0s
+ => [internal] load build context                                                                                                                                                                   0.0s
+ => => transferring context: 327B                                                                                                                                                                   0.0s
+ => [1/2] FROM docker.io/library/nginx:alpine@sha256:713fc2ebfd92e8217db451477182ee91944b123d2b1ee9fd5a8c6e91ca6c3a11                                                                               1.9s
+ => => resolve docker.io/library/nginx:alpine@sha256:713fc2ebfd92e8217db451477182ee91944b123d2b1ee9fd5a8c6e91ca6c3a11                                                                               0.0s
+ => => sha256:da90db506dd5f2d604467c4dc38442534f74c9e76c1982df0c262e144bad7bc9 20.55MB / 20.55MB                                                                                                    1.5s
+ => => sha256:69d81d5522572d5b7abcc8f594ecbc4cf9bea72402675a419e8d7b516e4c3f14 1.40kB / 1.40kB                                                                                                      0.5s
+ => => sha256:b9c6ee6a30f8811636d7273be348906cf0e4e9725378dd54b7d4a3725538cad4 1.21kB / 1.21kB                                                                                                      0.6s
+ => => sha256:a746bd1dc828f61bf43b775dcfecb9ded8a3d3b41789915fe135fa6b9fa85965 404B / 404B                                                                                                          0.6s
+ => => sha256:e011f124249bf1c4be27b3311c3b40cb90dd7737381af1c62b508020790b7bd5 965B / 965B                                                                                                          0.2s
+ => => sha256:c7dfd64eeb02740cc41e9f32ad7f75781882d4c167b77427aa9615d1419c4515 629B / 629B                                                                                                          0.2s
+ => => sha256:1abafee971b93c1ae05f03c35c6fb6e3376e75e6f16b590092a822b61ebf10b6 1.94MB / 1.94MB                                                                                                      0.4s
+ => => sha256:881fc932939efef04ca120ad44bbd2c0917851eb247aa4995428afb1e80ede17 3.85MB / 3.85MB                                                                                                      0.6s
+ => => extracting sha256:881fc932939efef04ca120ad44bbd2c0917851eb247aa4995428afb1e80ede17                                                                                                           0.1s
+ => => extracting sha256:1abafee971b93c1ae05f03c35c6fb6e3376e75e6f16b590092a822b61ebf10b6                                                                                                           0.1s
+ => => extracting sha256:c7dfd64eeb02740cc41e9f32ad7f75781882d4c167b77427aa9615d1419c4515                                                                                                           0.0s
+ => => extracting sha256:e011f124249bf1c4be27b3311c3b40cb90dd7737381af1c62b508020790b7bd5                                                                                                           0.0s
+ => => extracting sha256:a746bd1dc828f61bf43b775dcfecb9ded8a3d3b41789915fe135fa6b9fa85965                                                                                                           0.0s
+ => => extracting sha256:b9c6ee6a30f8811636d7273be348906cf0e4e9725378dd54b7d4a3725538cad4                                                                                                           0.0s
+ => => extracting sha256:69d81d5522572d5b7abcc8f594ecbc4cf9bea72402675a419e8d7b516e4c3f14                                                                                                           0.0s
+ => => extracting sha256:da90db506dd5f2d604467c4dc38442534f74c9e76c1982df0c262e144bad7bc9                                                                                                           0.2s
+ => [2/2] COPY site/ /usr/share/nginx/html/                                                                                                                                                         0.1s
+ => exporting to image                                                                                                                                                                              0.6s
+ => => exporting layers                                                                                                                                                                             0.1s
+ => => exporting manifest sha256:7310c06d9992ec73be098108246218a0ed47179875ef36eb5cee860e1e95af45                                                                                                   0.0s
+ => => exporting config sha256:259f511bb7a2b175c3cea56523b8c1f70e86953a1dc9f1102d9dd6d27cc292e5                                                                                                     0.0s
+ => => exporting attestation manifest sha256:fb52803f5197135e198497d55586cc90fd8858fd35b071574dd359efb8af20a6                                                                                       0.0s
+ => => exporting manifest list sha256:5e1f6c3a3d29a9d7575cf66018132ce046ace164cfbdf9fe804dd744ec74831a                                                                                              0.0s
+ => => naming to docker.io/library/dev-workstation-web:1.0                                                                                                                                          0.0s
+ => => unpacking to docker.io/library/dev-workstation-web:1.0  ]
 ```
 
 ### 14-2. 이미지 목록 확인
 
 ```bash
 $ docker images
-[실제 출력 붙여넣기]
+[IMAGE                     ID             DISK USAGE   CONTENT SIZE   EXTRA
+dev-workstation-web:1.0   5e1f6c3a3d29       93.7MB         26.4MB        
+hello-world:latest        c567b231f656       25.9kB         9.49kB    U   
+nginx:latest              165ddde8751e        243MB         66.8MB        
+ubuntu:22.04              076e7bf82319        119MB         31.7MB  ]
 ```
 
 ### 14-3. 컨테이너 실행
 
 ```bash
-$ docker run -d --name dev-web-8080 -p 8080:80 dev-workstation-web:1.0
-[실제 출력 붙여넣기]
+$ docker run -d --name my-web8080 -p 8080:80 dev-workstation-web:1.0
+[028de7f0f4efafe1780829632c7e8ccf955fa94bacec81aa760437cb6e6640fb]
 ```
 
 ### 14-4. 실행 상태 확인
 
 ```bash
 $ docker ps
-[실제 출력 붙여넣기]
+[CONTAINER ID   IMAGE                     COMMAND                   CREATED          STATUS          PORTS                                     NAMES
+028de7f0f4ef   dev-workstation-web:1.0   "/docker-entrypoint.…"   15 seconds ago   Up 14 seconds   0.0.0.0:8080->80/tcp, [::]:8080->80/tcp   my-web8080]
 ```
 
 ---
@@ -744,14 +783,7 @@ $ docker ps
 호스트 8080 포트 → 컨테이너 80 포트
 ```
 
-### 15-2. curl 접속 확인
-
-```bash
-$ curl http://localhost:8080
-[실제 출력 붙여넣기]
-```
-
-### 15-3. 브라우저 접속 증거
+### 15-2. 브라우저 접속 증거
 
 브라우저에서 다음 주소로 접속했습니다.
 
@@ -761,10 +793,7 @@ http://localhost:8080
 
 스크린샷:
 
-![포트 매핑 접속 증거](./evidence/screenshots/port-8080-browser.png)
-
-> 위 이미지 파일 경로에 실제 스크린샷을 저장하세요.  
-> 주소창에 `localhost:8080`이 보이도록 캡처해야 합니다.
+![포트 매핑 접속 증거](./screenshot/locatlhost80.png)
 
 ---
 
@@ -773,22 +802,67 @@ http://localhost:8080
 ### 16-1. 컨테이너 로그 확인
 
 ```bash
-$ docker logs dev-web-8080
-[실제 출력 붙여넣기]
+$ docker logs my-web8080
+[/docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
+/docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/
+/docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh
+10-listen-on-ipv6-by-default.sh: info: Getting the checksum of /etc/nginx/conf.d/default.conf
+10-listen-on-ipv6-by-default.sh: info: Enabled listen on IPv6 in /etc/nginx/conf.d/default.conf
+/docker-entrypoint.sh: Sourcing /docker-entrypoint.d/15-local-resolvers.envsh
+/docker-entrypoint.sh: Launching /docker-entrypoint.d/20-envsubst-on-templates.sh
+/docker-entrypoint.sh: Launching /docker-entrypoint.d/30-tune-worker-processes.sh
+/docker-entrypoint.sh: Configuration complete; ready for start up
+2026/11/08 00:30:11 [notice] 1#1: using the "epoll" event method
+2026/11/08 00:30:11 [notice] 1#1: nginx/1.31.8
+2026/11/08 00:30:11 [notice] 1#1: built by gcc 15.2.0 (Alpine 15.2.0) 
+2026/11/08 00:30:11 [notice] 1#1: OS: Linux 6.18.54.1-microsoft-standard-WSL2
+2026/11/08 00:30:11 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+2026/11/08 00:30:11 [notice] 1#1: start worker processes
+2026/11/08 00:30:11 [notice] 1#1: start worker process 30
+2026/11/08 00:30:11 [notice] 1#1: start worker process 31
+2026/11/08 00:30:11 [notice] 1#1: start worker process 32
+2026/11/08 00:30:11 [notice] 1#1: start worker process 33
+2026/11/08 00:30:11 [notice] 1#1: start worker process 34
+2026/11/08 00:30:11 [notice] 1#1: start worker process 35
+2026/11/08 00:30:11 [notice] 1#1: start worker process 36
+2026/11/08 00:30:11 [notice] 1#1: start worker process 37
+2026/11/08 00:30:11 [notice] 1#1: start worker process 38
+2026/11/08 00:30:11 [notice] 1#1: start worker process 39
+2026/11/08 00:30:11 [notice] 1#1: start worker process 40
+2026/11/08 00:30:11 [notice] 1#1: start worker process 41
+2026/11/08 00:30:11 [notice] 1#1: start worker process 42
+2026/11/08 00:30:11 [notice] 1#1: start worker process 43
+2026/11/08 00:30:11 [notice] 1#1: start worker process 44
+2026/11/08 00:30:11 [notice] 1#1: start worker process 45
+2026/11/08 00:30:11 [notice] 1#1: start worker process 46
+2026/11/08 00:30:11 [notice] 1#1: start worker process 47
+2026/11/08 00:30:11 [notice] 1#1: start worker process 48
+2026/11/08 00:30:11 [notice] 1#1: start worker process 49
+2026/11/08 00:30:11 [notice] 1#1: start worker process 50
+2026/11/08 00:30:11 [notice] 1#1: start worker process 51
+2026/11/08 00:30:11 [notice] 1#1: start worker process 52
+2026/11/08 00:30:11 [notice] 1#1: start worker process 53
+2026/11/08 00:30:20 [error] 30#30: *1 open() "/usr/share/nginx/html/favicon.ico" failed (2: No such file or directory), client: 172.17.0.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", host: "localhost:8080", referrer: "http://localhost:8080/"
+172.17.0.1 - - [08/Nov/2026:00:30:20 +0000] "GET /favicon.ico HTTP/1.1" 404 555 "http://localhost:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36 Edg/157.0.0.0" "-"
+172.17.0.1 - - [08/Nov/2026:00:30:23 +0000] "GET / HTTP/1.1" 200 258 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36 Edg/157.0.0.0" "-"]
 ```
 
 ### 16-2. 리소스 사용량 확인
 
 ```bash
-$ docker stats dev-web-8080 --no-stream
-[실제 출력 붙여넣기]
+$ docker stats my-web8080 --no-stream
+[CONTAINER ID   NAME         CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O     PIDS
+f0e355228b63   my-web8080   0.00%     20.75MiB / 15.25GiB   0.13%     3.95kB / 2.64kB   0B / 12.3kB   25]
 ```
 
 ### 16-3. 전체 컨테이너 목록 확인
 
 ```bash
 $ docker ps -a
-[실제 출력 붙여넣기]
+[CONTAINER ID   IMAGE                     COMMAND                   CREATED         STATUS                    PORTS                                     NAMES
+f0e355228b63   dev-workstation-web:1.0   "/docker-entrypoint.…"   9 minutes ago   Up 9 minutes              0.0.0.0:8080->80/tcp, [::]:8080->80/tcp   my-web8080
+60a13240a878   hello-world               "/hello"                  15 hours ago    Exited (0) 15 hours ago                                             stupefied_ganguly
+e01cbfb0bfba   hello-world               "/hello"                  15 hours ago    Exited (0) 15 hours ago                                             angry_bhaskara]
 ```
 
 ---
@@ -801,22 +875,22 @@ $ docker ps -a
 ### 17-1. 기존 컨테이너 정리
 
 ```bash
-$ docker stop dev-web-8080
-[실제 출력 붙여넣기]
+$ docker stop my-web8080
+[my-web8080]
 
-$ docker rm dev-web-8080
-[실제 출력 붙여넣기]
+$ docker rm my-web8080
+[my-web8080]
 ```
 
 ### 17-2. 바인드 마운트로 컨테이너 실행
 
 ```bash
 $ docker run -d \
-  --name dev-web-bind \
-  -p 8081:80 \
+  --name my-webBind \
+  -p 8080:80 \
   -v "$(pwd)/site:/usr/share/nginx/html:ro" \
   dev-workstation-web:1.0
-[실제 출력 붙여넣기]
+[6b5fd89fff8fab218a90ad060d427b069f8859ced8a24dec029e6e6bb5aeafc1]
 ```
 
 ### 17-3. 변경 전 접속 결과
@@ -826,7 +900,7 @@ $ curl http://localhost:8081
 [실제 출력 붙여넣기]
 ```
 
-### 17-4. 호스트 파일 수정
+### 17-3. 호스트 파일 수정
 
 ```bash
 $ cat > site/index.html <<'EOF'
@@ -838,4 +912,13 @@ $ cat > site/index.html <<'EOF'
 </head>
 <body>
   <h1>Bind Mount Updated</h1>
-  <
+  <p>이 페이지는 바인드 마운트로 수정되었습니다.</p>
+</body>
+</html>
+EOF
+```
+스크린샷:
+
+![포트 매핑 접속 증거](./screenshot/localhost_Bindmount.png)
+
+---
