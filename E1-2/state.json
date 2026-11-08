@@ -1,0 +1,105 @@
+{
+  "quizzes": [
+    {
+      "question": "Python에서 문자열을 나타내는 자료형은?",
+      "choices": [
+        "int",
+        "str",
+        "bool",
+        "list"
+      ],
+      "answer": 2
+    },
+    {
+      "question": "Python에서 조건문을 만들 때 사용하는 키워드는?",
+      "choices": [
+        "for",
+        "while",
+        "if",
+        "def"
+      ],
+      "answer": 3
+    },
+    {
+      "question": "Python에서 리스트를 나타낼 때 사용하는 기호는?",
+      "choices": [
+        "()",
+        "{}",
+        "[]",
+        "<>"
+      ],
+      "answer": 3
+    },
+    {
+      "question": "Python에서 반복문에 사용할 수 있는 키워드는?",
+      "choices": [
+        "repeat",
+        "loop",
+        "for",
+        "switch"
+      ],
+      "answer": 3
+    },
+    {
+      "question": "Python에서 함수를 정의할 때 사용하는 키워드는?",
+      "choices": [
+        "function",
+        "def",
+        "func",
+        "method"
+      ],
+      "answer": 2
+    },
+    {
+      "question": "Python 클래스에서 객체를 초기화할 때 주로 사용하는 메서드는?",
+      "choices": [
+        "__start__",
+        "__init__",
+        "__main__",
+        "__class__"
+      ],
+      "answer": 2
+    },
+    {
+      "question": "JSON 파일을 Python에서 불러올 때 사용하는 표준 라이브러리는?",
+      "choices": [
+        "csv",
+        "math",
+        "json",
+        "random"
+      ],
+      "answer": 3
+    },
+    {
+      "question": "Python에서 예외 처리를 할 때 사용하는 문법은?",
+      "choices": [
+        "try-except",
+        "if-else",
+        "for-in",
+        "class-object"
+      ],
+      "answer": 1
+    },
+    {
+      "question": "Python에서 딕셔너리를 나타낼 때 사용하는 기호는?",
+      "choices": [
+        "[]",
+        "()",
+        "{}",
+        "||"
+      ],
+      "answer": 3
+    },
+    {
+      "question": "Python에서 참(True) 또는 거짓(False)을 나타내는 자료형은?",
+      "choices": [
+        "int",
+        "str",
+        "bool",
+        "float"
+      ],
+      "answer": 3
+    }
+  ],
+  "best_score": 0
+}
