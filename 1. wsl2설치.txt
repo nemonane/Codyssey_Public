@@ -1,0 +1,74 @@
+1. wsl2설치
+powerShell 관리자 권한 시작
+wsl
+wsl --install
+--> Ubuntu 설치
+wsl --update
+
+2. 깃 설치
+git --version
+
+sudo apt update
+sudo apt install git
+
+git --version
+
+3. curl, wget, unzip, git 등 기본 한꺼번에 깔기
+sudo apt update && sudo apt upgrade
+sudo apt install -y build-essential curl wget git unzip
+
+4. 프로젝트 폴더 만들기
+cd ~
+pwd
+mkdir -p ~/codyssey
+cd ~/codyssey && mkdir myapp && cd myapp
+pwd
+
+5. git · GitHub 설정
+git config --global user.name "nemonane"
+git config --global user.emali "yucho@nemosystems.kr"
+git config --global init.defaultBranch main
+git config --global --list
+
+sudo apt install -y gh
+gh --version
+gh auth login
+
+5. Python 설치
+sudo app install -y python3-pip python3-venv
+python3 --version && pip --version
+
+cd ~/codyssey/E1-1 
+python3 -m venv .venv  #.venv 폴더 생성. python3 모듈 venv실행
+sourcd .venv/bin/activate  # 활성화
+pip install --upgrade pip
+
+pip install ruff
+ruff check .  >> All checks passed!
+ruff format .
+
+sudo apt install -y direnv
+cd ~/codyssey/E1-1
+echo 'source .venv/bin/activate' > .envrc
+direnv allow
+
+6. Docke Desktop 설치
+파워쉘
+winget install -e --id Docker.DockerDesktop
+
+DockerDesktop 설정에서
+Enable integration with my default WSL distor -> on
+additional distros => Ubuntu
+Apply & Restart
+
+7. VS Code 설치
+winget install -e --id Microsoft.VisualStudioCode
+
+cd ~/codyssey/E1-1
+code .
+code --install-extension eamodio.gitlens
+code --install-extension github.vscode-pull-request-github
+code --install-extension ms-pyton.python
+code --install-extenstion ms-toolsai.jupyter
+
+
