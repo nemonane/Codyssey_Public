@@ -1,0 +1,27 @@
+1. wsl 2 깔기
+ 
+2. build-essential, git, wget, curl,  unzip 깔기
+sudo apt update && sudo apt upgrae
+wget --version
+curl --version
+git --version
+unzip --version
+
+만약 unzip가 안 깔렸다면 
+sudo apt install unzip
+
+python 설치
+sudo apt update
+sudo apt install -y python3
+python3 --version
+
+3. Git 연결
+git config --global user.name "yucho"
+git config --global user.email "yucho@nemosystems.kr"
+git config --global init.defaultBranch main
+git cofnig --list
+
+4. GitHub 설치
+sudo apt install -y gh
+gh --version
+gh auth login
