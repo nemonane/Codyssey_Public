@@ -52,26 +52,43 @@ $ git --version
   - [x] 5.5.9 절대경로와 상대경로 정리
   - [x] 5.5.10 파일 권한 변경 실습
   - [x] 5.5.11 파일 및 디렉토리 권한 실습
-- [x] 6. Docker 설치 및 버전 확인
-- [x] Docker 데몬 동작 확인
-- [x] Docker 이미지 다운로드 및 목록 확인
-- [x] Docker 컨테이너 실행/중지/삭제
-- [x] Docker 로그 확인
-- [x] Docker 리소스 상태 확인
-- [x] hello-world 컨테이너 실행
-- [x] ubuntu 컨테이너 실행 및 내부 명령 수행
-- [x] Dockerfile 직접 작성
-- [x] 커스텀 이미지 빌드
-- [x] 웹 서버 컨테이너 실행
-- [x] 포트 매핑 접속 검증
-- [x] 바인드 마운트 반영 검증
-- [x] Docker 볼륨 영속성 검증
-- [x] Git 사용자 정보 및 기본 브랜치 설정
-- [x] GitHub 원격 저장소 연동
-- [x] VSCode GitHub 연동 증거 첨부
-- [x] 트러블슈팅 2건 이상 기록
-- [x] 민감정보 마스킹 확인
-
+- [x] 6. Docker 설치 및 운용
+  - [x] 6.1 Docker 설치 및 버전 확인
+  - [x] 6.2 Docker 데몬 동작 확인
+  - [x] 6.3 이미지 Docker Hub에서 다운로드
+  - [x] 6.4 이미지 목록 확인
+  - [x] 6.5 컨테이너 실행
+    - [x] (트러블 슈팅) 6.5.1 이미 my-nginx라는 이름의 컨테이너가 존재 -> stop(정리)
+    - [x] (트러블 슈팅) 6.5.2 기존 컨테이너 삭제
+    - [x] (트러블 슈팅) 6.5.3 다시 실행
+  - [x] 6.3 Docker 로그 확인
+  - [x] 6.4 컨테이너의 사용 리소스 확인 및 기본 명령어 수행
+  - [x] 6.5 hello-world 실행
+  - [x] 6.6 ubuntu 컨테이너 실행 
+  - [x] 6.7 ubuntu 컨테이너 내부 진입 및 명령 실행
+  - [x] 6.8 ubuntu 컨테이너 정리
+  - [x] 7.Dockerfile 기반 웹 서버 컨테이너
+  - [x] 7.1 선택한 방식
+  - [x] 7.2 site/index.html 작성
+  - [x] 7.3 Dockerfild 작성
+  - [x] 7.4 커스텀 이미지 빌드 및 실행
+    - [x] 7.4.1 이미지 빌드
+    - [x] 7.4.2 이미지 목록 확인
+    - [x] 7.4.3 컨테이너 실행
+    - [x] 7.4.4 실행상태 확인
+  - [x] 7.5 포트 매핑 접속 증거
+    - [x] 7.5.1 포트 매핑 설명
+    - [x] 7.5.2 브라우저 접속 증거
+  - [x] 7.6 Docker 운영 및 검증 로그
+    - [x] 7.6.1 컨테이너 로그 확인
+    - [x] 7.6.2 리소스 사용량 확인
+    - [x] 7.6.3 전체 컨테이너 목록 확인
+ - [x] 8. 바운드 마운트 반영 검증
+  - [x] 8.1 기존 컨테이너 정리
+  - [x] 8.2 바인드 마운트 컨테이너 실행
+  - [x] 8.3 변경 전 접속 결과
+  - [x] 8.4 호스트 파일 수정 및 스크린샷
+- [x] 9. VSCode GitHub 연동 증거
 ---
 ## 4. 프로젝트 폴더 구조
 ```bash
@@ -322,17 +339,24 @@ Linux/Unix 계열 파일 권한은 다음 세 그룹으로 나뉩니다.
 디렉토리에서 `x` 권한은 해당 디렉토리 안으로 접근할 수 있는 권한을 의미합니다.
 
 ---
+## 6. Docker 설치 및 운용
+### 6.1 Docker 설치 및 버전 확인
 
-## 6. Docker 설치 및 기본 점검
-
-### 8-1. Docker 버전 확인
-
-```bash
+```powershell
+$ winget install -e --id Docker.DockerDesktop
 $ docker --version
-[Docker version 29.9.2, build a82e528]
+[Docker version 29.9.3, build 5457199]
 ```
-
-### 8-2. Docker 데몬 동작 확인
+- Settings
+> Enable integration with default WSL distro >> ON
+> Enable integration with additional distro >> UBUNTU
+>> Apply & Restart Engine
+ 
+```bash
+$ sudo groupadd docker
+$ sudo usermod -aG docker $USER
+```
+### 6.2 Docker 데몬 동작 확인
 
 ```bash
 $ docker info
@@ -446,11 +470,7 @@ Server:
 확인 결과 Docker Client와 Server 정보가 출력되어 Docker 데몬이 정상 동작함을 확인했습니다.
 
 ---
-
-## 9. Docker 기본 운영 명령 실습
-
-### 9-1. 이미지 다운로드
-
+### 6.3 이미지 Docker Hub에서 다운로드
 ```bash
 $ docker pull nginx
 [Using default tag: latest
@@ -459,9 +479,7 @@ Digest: sha256:165ddde8751e75a1c907d24ef10d9f6deb08b57e0fe56caf67512486aff76d82
 Status: Image is up to date for nginx:latest
 docker.io/library/nginx:latest]
 ```
-
-### 9-2. 이미지 목록 확인
-
+### 6.4 이미지 목록 확인
 ```bash
 $ docker images
 [                                                                                   i Info →   U  In Use
@@ -470,13 +488,13 @@ hello-world:latest   c567b231f656       25.9kB         9.49kB    U
 nginx:latest         165ddde8751e        243MB         66.8MB    U   ]
 ```
 
-### 9-3. 컨테이너 실행
-
+### 6.5 컨테이너 실행
 ```bash
 $ docker run -d --name my-nginx -p 8080:80 nginx
 [docker: Error response from daemon: Conflict. The container name "/my-nginx" is already in use by container "0efa9915db45f3f42a7ee73ef7c912dfaf4d2deef4dcd3a38ee32853a9ec13a0". You have to remove (or rename) that container to be able to reuse that name.
 
 Run 'docker run --help' for more information
+
 yucho8990@GNIA-C201-H04:~$ docker ps -a
 CONTAINER ID   IMAGE         COMMAND                  CREATED              STATUS                   PORTS                                           NAMES
 0efa9915db45   nginx         "/docker-entrypoint.…"   About a minute ago   Up About a minute        0.0.0.0:58806->8080/tcp, [::]:58806->8080/tcp   my-nginx
@@ -488,32 +506,29 @@ cd4e6730122a   nginx         "/docker-entrypoint.…"   3 hours ago          Cre
 c8b261222364   hello-world   "/hello"                 4 hours ago          Exited (0) 4 hours ago                                                   intelligent_engelbart
 a2a0e3e33f7f   hello-world   "/hello"                 4 hours ago          Exited (0) 4 hours ago                                                   lucid_joliot]
 ```
-### (트러블 슈팅) 9-3-1. 이미 my-nginx라는 이름의 컨테이너가 존재 -> stop(정리)
+### (트러블 슈팅) 6.5.1. 이미 my-nginx라는 이름의 컨테이너가 존재 -> stop(정리)
 ``` 
 docker stop my-nginx #기존my-nginx(stop)
 docker stop sleepy_mcclintock #기존sleepy_mcclintock(stop)
 ```
-### (트러블 슈팅) 9-3-2. 기존 컨테이너 삭제
+### (트러블 슈팅) 6.5.2. 기존 컨테이너 삭제
 ```
 docker rm $(docker ps -aq) #모든컨테이너삭제
 docker ps -a #확인
 [CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES]
 ```
-### (트러블 슈팅) 9-3-2. 다시 실행
+### (트러블 슈팅) 6.5.3. 다시 실행
 ```
 $ docker run -d --name my-nginx -p 8080:80 nginx
 [fd1ce6dffd63b572d27dc0dff75e20248061ed6f668cd3903f2f0be30aab3ad1]
 ```
-### 9-4. 실행 중인 컨테이너 확인
 
 ```bash
 $ docker ps
 [CONTAINER ID   IMAGE     COMMAND                  CREATED              STATUS              PORTS                                     NAMES
 fd1ce6dffd63   nginx     "/docker-entrypoint.…"   About a minute ago   Up About a minute   0.0.0.0:8080->80/tcp, [::]:8080->80/tcp   my-nginx]
 ```
-
-### 9-5. 컨테이너 로그 확인
-
+### 6.3 Docker 로그 확인
 ```bash
 $ docker logs my-nginx
 [/docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
@@ -537,33 +552,25 @@ $ docker logs my-nginx
 2026/11/07 09:31:28 [notice] 1#1: start worker process 32
 2026/11/07 09:31:28 [notice] 1#1: start worker process 33]
 ```
-
-### 9-6. 컨테이너 리소스 확인
-
+### 6.4 컨테이너의 사용 리소스 확인 및 기본 명령어 수행
 ```bash
 $ docker stats my-nginx --no-stream
 [CONTAINER ID   NAME       CPU %     MEM USAGE / LIMIT     MEM %     NET I/O         BLOCK I/O     PIDS
 fd1ce6dffd63   my-nginx   0.00%     21.11MiB / 15.25GiB   0.14%     1.17kB / 126B   0B / 12.3kB   25]
 $ Ctrl + C
 ```
-
-### 9-7. 컨테이너 중지
-
+- 컨테이너 중지
 ```bash
 $ docker stop my-nginx
 [my-nginx]
 ```
-
-### 9-8. 전체 컨테이너 목록 확인
-
+- 전체 컨테이너 목록 확인
 ```bash
 $ docker ps -a
 [CONTAINER ID   IMAGE     COMMAND                  CREATED         STATUS                      PORTS     NAMES
 fd1ce6dffd63   nginx     "/docker-entrypoint.…"   9 minutes ago   Exited (0) 15 seconds ago             my-nginx]
 ```
-
-### 9-9. 컨테이너 삭제
-
+- 컨테이너 삭제
 ```bash
 $ docker rm my-nginx
 [my-nginx]
@@ -572,10 +579,7 @@ $ docker ps
 ```
 
 ---
-
-## 10. 컨테이너 실행 실습
-
-### 10-1. hello-world 실행
+### 6.5 hello-world 실행
 
 ```bash
 $ docker run hello-world
@@ -604,9 +608,7 @@ For more examples and ideas, visit:
 `hello-world` 컨테이너 실행을 통해 Docker가 이미지를 내려받고 컨테이너를 실행할 수 있음을 확인했습니다.
 
 ---
-
-### 10-2. ubuntu 컨테이너 실행
-
+### 6.6 ubuntu 컨테이너 실행
 ```bash
 $ docker run -dit --name ubuntu-lab ubuntu:22.04 bash
 [Unable to find image 'ubuntu:22.04' locally
@@ -622,7 +624,7 @@ $ docker ps
 42adc3e99e6f   ubuntu:22.04   "bash"    42 seconds ago   Up 41 seconds             ubuntu-lab]
 ```
 
-### 10-3. ubuntu 컨테이너 내부 진입 및 명령 실행
+### 6.7 ubuntu 컨테이너 내부 진입 및 명령 실행
 
 ```bash
 $ docker exec -it ubuntu-lab bash
@@ -639,17 +641,16 @@ root@[컨테이너ID]:/# exit
 exit
 ```
 
-### 10-4. attach와 exec 차이 정리
+- attach와 exec 차이 정리
 
-| 명령 | 설명 |
-|---|---|
-| docker attach | 실행 중인 컨테이너의 기본 프로세스에 연결 |
-| docker exec | 실행 중인 컨테이너 안에서 새로운 명령 실행 |
-
+| 명령            | 설명                       |
+| ------------- | ------------------------ |
+| docker attach | 실행 중인 컨테이너의 기본 프로세스에 연결  |
+| docker exec   | 실행 중인 컨테이너 안에서 새로운 명령 실행 |
 `docker exec`는 컨테이너를 유지한 상태에서 bash나 ls 같은 추가 명령을 실행할 때 편리합니다.  
 반면 `docker attach`는 컨테이너의 메인 프로세스에 직접 붙기 때문에 상황에 따라 종료 동작에 주의해야 합니다.
 
-### 10-5. ubuntu 컨테이너 정리
+### 6.8 ubuntu 컨테이너 정리
 
 ```bash
 $ docker stop ubuntu-lab
@@ -672,42 +673,31 @@ e01cbfb0bfba   hello-world   "/hello"   13 hours ago   Exited (0) 13 hours ago  
 
 ---
 
-## 11. Dockerfile 기반 커스텀 웹 서버
+## 7. Dockerfile 기반 커스텀 웹 서버
 
-### 11-1. 선택한 방식
+### 7.1 선택한 방식
 
-본 과제에서는 다음 방식을 선택했습니다.
-
+- 본 과제에서는 다음 방식을 선택했습니다.
 ```text
 (A) 웹 서버 베이스 이미지 활용: nginx:alpine + 정적 콘텐츠 교체
 ```
-
-### 11-2. 베이스 이미지
-
+- 베이스 이미지
 ```text
 nginx:alpine
 ```
-
 선택 이유:
-
 - 정적 웹 페이지 제공에 적합합니다.
 - Alpine 기반이라 이미지 크기가 비교적 작습니다.
 - 기본 설정만으로도 80번 포트에서 웹 서버를 실행할 수 있습니다.
 
-### 11-3. 커스텀 포인트
+-  커스텀 포인트
 
-| 항목 | 목적 |
-|---|---|
+| 항목                                  | 목적                             |
+| ----------------------------------- | ------------------------------ |
 | `COPY site/ /usr/share/nginx/html/` | 직접 작성한 HTML 파일을 NGINX 웹 루트에 복사 |
-| `LABEL` | 이미지 설명 메타데이터 추가 |
-| `ENV APP_ENV=dev` | 실행 환경 값을 이미지에 포함 |
-
----
-
-## 12. 웹 서버 소스코드
-
-### 12-1. `site/index.html`
-
+| `LABEL`                             | 이미지 설명 메타데이터 추가                |
+| `ENV APP_ENV=dev`                   | 실행 환경 값을 이미지에 포함               |
+### 7.2 `site/index.html`작성
 ```html
 <!DOCTYPE html>
 <html lang="ko">
@@ -717,15 +707,12 @@ nginx:alpine
 </head>
 <body>
   <h1>Hello Docker Custom Web Server</h1>
-  <p>Dockerfile 기반 커스텀 NGINX 웹 서버입니다.</p>
+  <p>Dockerfile 기반 커스텀 NGINX 웹 서버입니다^^.</p>
 </body>
 </html>
 ```
-
 ---
-
-## 13. Dockerfile
-
+### 7.3 Dockerfile 작성
 ```dockerfile
 FROM nginx:alpine
 
@@ -738,11 +725,9 @@ COPY site/ /usr/share/nginx/html/
 ```
 
 ---
+### 7.4 커스텀 이미지 빌드 및 실행
 
-## 14. 커스텀 이미지 빌드 및 실행
-
-### 14-1. 이미지 빌드
-
+#### 7.4.1 이미지 빌드
 ```bash
 $ docker build -t dev-workstation-web:1.0 .
 [[+] Building 4.6s (7/7) FINISHED                                                                                                                                                    docker:desktop-linux
@@ -781,9 +766,7 @@ $ docker build -t dev-workstation-web:1.0 .
  => => naming to docker.io/library/dev-workstation-web:1.0                                                                                                                                          0.0s
  => => unpacking to docker.io/library/dev-workstation-web:1.0  ]
 ```
-
-### 14-2. 이미지 목록 확인
-
+#### 7.4.2 이미지 목록 확인
 ```bash
 $ docker images
 [IMAGE                     ID             DISK USAGE   CONTENT SIZE   EXTRA
@@ -792,59 +775,43 @@ hello-world:latest        c567b231f656       25.9kB         9.49kB    U
 nginx:latest              165ddde8751e        243MB         66.8MB        
 ubuntu:22.04              076e7bf82319        119MB         31.7MB  ]
 ```
-
-### 14-3. 컨테이너 실행
-
+#### 7.4.3 컨테이너 실행
 ```bash
 $ docker run -d --name my-web8080 -p 8080:80 dev-workstation-web:1.0
 [028de7f0f4efafe1780829632c7e8ccf955fa94bacec81aa760437cb6e6640fb]
 ```
-
-### 14-4. 실행 상태 확인
-
+#### 7.4.4 실행 상태 확인
 ```bash
 $ docker ps
 [CONTAINER ID   IMAGE                     COMMAND                   CREATED          STATUS          PORTS                                     NAMES
 028de7f0f4ef   dev-workstation-web:1.0   "/docker-entrypoint.…"   15 seconds ago   Up 14 seconds   0.0.0.0:8080->80/tcp, [::]:8080->80/tcp   my-web8080]
 ```
-
 ---
-
-## 15. 포트 매핑 접속 증거
-
-### 15-1. 포트 매핑 설명
-
+### 7.5 포트 매핑 접속 증거
+#### 7.5.1 포트 매핑 설명
 컨테이너 내부의 NGINX는 80번 포트에서 실행됩니다.  
 하지만 컨테이너 내부 포트는 호스트에서 바로 접근할 수 없기 때문에 다음과 같이 포트 매핑을 사용했습니다.
-
 ```bash
 -p 8080:80
 ```
-
 의미:
-
 ```text
 호스트 8080 포트 → 컨테이너 80 포트
 ```
 
-### 15-2. 브라우저 접속 증거
-
+#### 7.5.2 브라우저 접속 증거
 브라우저에서 다음 주소로 접속했습니다.
-
 ```text
 http://localhost:8080
 ```
-
 스크린샷:
 
 ![포트 매핑 접속 증거](./screenshot/locatlhost80.png)
 
 ---
 
-## 16. Docker 운영 및 검증 로그
-
-### 16-1. 컨테이너 로그 확인
-
+### 7.6 Docker 운영 및 검증 로그
+#### 7.6.1 컨테이너 로그 확인
 ```bash
 $ docker logs my-web8080
 [/docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
@@ -890,17 +857,13 @@ $ docker logs my-web8080
 172.17.0.1 - - [08/Nov/2026:00:30:20 +0000] "GET /favicon.ico HTTP/1.1" 404 555 "http://localhost:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36 Edg/157.0.0.0" "-"
 172.17.0.1 - - [08/Nov/2026:00:30:23 +0000] "GET / HTTP/1.1" 200 258 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36 Edg/157.0.0.0" "-"]
 ```
-
-### 16-2. 리소스 사용량 확인
-
+#### 7.6.2 리소스 사용량 확인
 ```bash
 $ docker stats my-web8080 --no-stream
 [CONTAINER ID   NAME         CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O     PIDS
 f0e355228b63   my-web8080   0.00%     20.75MiB / 15.25GiB   0.13%     3.95kB / 2.64kB   0B / 12.3kB   25]
 ```
-
-### 16-3. 전체 컨테이너 목록 확인
-
+#### 7.6.3 전체 컨테이너 목록 확인
 ```bash
 $ docker ps -a
 [CONTAINER ID   IMAGE                     COMMAND                   CREATED         STATUS                    PORTS                                     NAMES
@@ -910,14 +873,11 @@ e01cbfb0bfba   hello-world               "/hello"                  15 hours ago 
 ```
 
 ---
+## 8. 바인드 마운트 반영 검증
 
-## 17. 바인드 마운트 반영 검증
-
-바인드 마운트는 호스트의 특정 디렉토리를 컨테이너 내부 경로에 직접 연결하는 방식입니다.  
-호스트 파일을 수정하면 컨테이너 내부에서도 변경된 내용이 바로 반영됩니다.
-
-### 17-1. 기존 컨테이너 정리
-
+- 바인드 마운트는 호스트의 특정 디렉토리를 컨테이너 내부 경로에 직접 연결하는 방식입니다.  
+- 호스트 파일을 수정하면 컨테이너 내부에서도 변경된 내용이 바로 반영됩니다.
+### 8.1 기존 컨테이너 정리
 ```bash
 $ docker stop my-web8080
 [my-web8080]
@@ -925,9 +885,7 @@ $ docker stop my-web8080
 $ docker rm my-web8080
 [my-web8080]
 ```
-
-### 17-2. 바인드 마운트로 컨테이너 실행
-
+### 8.2 바인드 마운트로 컨테이너 실행
 ```bash
 $ docker run -d \
   --name my-webBind \
@@ -936,16 +894,12 @@ $ docker run -d \
   dev-workstation-web:1.0
 [6b5fd89fff8fab218a90ad060d427b069f8859ced8a24dec029e6e6bb5aeafc1]
 ```
-
-### 17-3. 변경 전 접속 결과
-
+### 8.3 변경 전 접속 결과
 ```bash
 $ curl http://localhost:8081
 [실제 출력 붙여넣기]
 ```
-
-### 17-3. 호스트 파일 수정
-
+### 8.4 호스트 파일 수정 및 스크린샷
 ```bash
 $ cat > site/index.html <<'EOF'
 <!DOCTYPE html>
@@ -961,11 +915,10 @@ $ cat > site/index.html <<'EOF'
 </html>
 EOF
 ```
-스크린샷:
-
+- 스크린샷:
 ![포트 매핑 접속 증거](./screenshot/localhost_Bindmount.png)
 
-### 18. VSCode GitHub 연동 증거 
+### 9. VSCode GitHub 연동 증거 
 
 스크린샷:
 ![VSCode GitHub 연동증거](./screenshot/VSCode_GitHub.png)
