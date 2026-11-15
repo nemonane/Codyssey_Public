@@ -13,16 +13,14 @@ Github와 Codyssey를 연동하기 위해 만들어진 Repository입니다.
 
 ## 2. 실행 환경
 
-| 항목 | 내용 |
-|---|---|
-| OS |  Ubunto 22.04 LTS(WSL2), Windows WSL  |
-| Shell | bash,  PowerShell |
-| Terminal | VSCode Terminal |
-| Docker | 아래 명령 결과 참고 |
-| Git | 아래 명령 결과 참고 |
-
+| 항목       | 내용                                  |
+| -------- | ----------------------------------- |
+| OS       | Ubunto 22.04 LTS(WSL2), Windows WSL |
+| Shell    | bash,  PowerShell                   |
+| Terminal | VSCode Terminal                     |
+| Docker   | 아래 명령 결과 참고                         |
+| Git      | 아래 명령 결과 참고                         |
 ### 실행 환경 확인 로그
-
 ```bash
 $ uname -a
 [Linux GNIA-C201-H04 6.18.54.1-microsoft-standard-WSL2 #1 SMP PREEMPT_DYNAMIC Tue Oct  6 19:13:07 UTC 2026 x86_64 GNU/Linux]
@@ -36,26 +34,25 @@ $ docker --version
 $ git --version
 [git version 2.53.0]
 ```
-
 ---
-
 ## 3. 수행 항목 체크리스트
-- [x] GitHub Repository 생성
-- [x] WSL, Ubuntu 설치
-- [x] 터미널 기본 조작 수행
-  - [x] 현재 위치 확인
-  - [x] 목록 확인, 숨김 파일 포함 확인
-  - [x] 디렉토리 이동
-  - [x] 파일/디렉토리 생성
-  - [x] 파일 복사
-  - [x] 파일 이동/이름 변경
-  - [x] 파일 삭제
-  - [x] 파일 내용 확인
-  - [x] 빈 파일 생성
-  - [x] 파일 권한 변경 실습
-  - [x] 디렉토리 권한 변경 실습
-- [ ] 
-- [x] Docker 설치 및 버전 확인
+- [x] 5.1 GitHub Repository 생성
+- [x] 5.2 wsl 설치
+- [x] 5.3 update & upgrade, 빌더 필수 도구 설치
+- [x] 5.4 git설정, GitHub에서 가져오기
+- [x] 5.5 터미널 기본 조작 수행
+  - [x] 5.5.1 현재 위치 확인
+  - [x] 5.5.2 목록 확인, 숨김 파일 포함 확인
+  - [x] 5.5.3 디렉토리 이동
+  - [x] 5.5.4 디렉토리 및 파일 생성
+  - [x] 5.5.5 파일 내용 작성 및 확인
+  - [x] 5.5.6 파일 복사
+  - [x] 5.5.7 파일 이동 및 이름 변경
+  - [x] 5.5.8 파일 삭제
+  - [x] 5.5.9 절대경로와 상대경로 정리
+  - [x] 5.5.10 파일 권한 변경 실습
+  - [x] 5.5.11 파일 및 디렉토리 권한 실습
+- [x] 6. Docker 설치 및 버전 확인
 - [x] Docker 데몬 동작 확인
 - [x] Docker 이미지 다운로드 및 목록 확인
 - [x] Docker 컨테이너 실행/중지/삭제
@@ -76,17 +73,13 @@ $ git --version
 - [x] 민감정보 마스킹 확인
 
 ---
-
 ## 4. 프로젝트 폴더 구조
-
 ```bash
 $ sudo apt update
   sudo apt install tree
   tree
 ```
-
 출력:
-
 ```text
 .
 ├── Dockerfile
@@ -104,20 +97,56 @@ $ sudo apt update
 └── site
     └── index.html
 ```
-
 ---
+## 5. 수행 항목
+### 5.1 GitHub repo 생성
+```
+github.com에서 회원가입 후, repository public으로 생성
+```
+### 5.2 wsl 설치
+```
+$ wsl --install
+[reate a default Unix user account : yucho8990 => enter]
+[New password :]
+[Retype new password]
+[...]
+```
+### 5.3 update & upgrade, 빌더 필수 도구 설치
+```
+$ sudo apt update && sudo apt upgrade -y
+$ sudo apt install -y build-essential curl wget git unzip
+```
+### 5.4 Git설정, GitHub에서 가져오기
+- Git 설정
+```
+$ sudo apt update && sudo apt upgrade -y
+[git version 2.53.0]
 
-## 5. 터미널 기본 조작 로그
+$ git config --global user.name "nemonane"
+$ git config --global user.email "yucho@nemosystems.kr"
+$ git config --global --list
+[user.name=nemonane
+user.email=yucho@nemosystems.kr]
+```
+- GitHub에서 가져오기 [option]
+```
+$ git clone https://github.com/nemonane/Codyssey_Public.git
+[Cloning into 'Codyssey_Public'...
+remote: Enumerating objects: 107, done.
+remote: Counting objects: 100% (107/107), done.
+remote: Compressing objects: 100% (89/89), done.
+remote: Total 107 (delta 40), reused 43 (delta 6), pack-reused 0 (from 0)
+Receiving objects: 100% (107/107), 5.84 MiB | 16.70 MiB/s, done.
+Resolving deltas: 100% (40/40), done.]
+```
 
-### 5-1. 현재 위치 확인
-
+### 5.5 터미널 기본 조작 수행
+#### 5.5.1 현재 위치 확인
 ```bash
 $ pwd
 [/mnt/d/codyssey_01/Codyssey_Public/e1-1]
 ```
-
-### 5-2. 목록 확인
-
+#### 5.5.2 목록 확인, 숨김 파일 포함 확인
 ```bash
 $ ls
 [Dockerfile  README.md  screenshot  site]
@@ -131,9 +160,7 @@ drwxrwxrwx 1 yucho8990 yucho8990  4096 Nov  8 08:43 ..
 drwxrwxrwx 1 yucho8990 yucho8990  4096 Nov  8 10:00 screenshot
 drwxrwxrwx 1 yucho8990 yucho8990  4096 Nov  8 09:04 site]
 ```
-
-### 5-3. 디렉토리 이동
-
+#### 5.5.3  디렉토리 이동
 ```bash
 $ cd site
 $ pwd
@@ -143,9 +170,7 @@ $ cd ..
 $ pwd
 [/mnt/d/codyssey_01/Codyssey_Public/e1-1]
 ```
-
-### 5-4. 디렉토리 및 파일 생성
-
+#### 5.5.4  디렉토리 및 파일 생성
 ```bash
 $ mkdir TestDir
 $ touch TestDir/empty.txt
@@ -155,17 +180,13 @@ drwxrwxrwx 1 yucho8990 yucho8990 4096 Nov  8 10:14 .
 drwxrwxrwx 1 yucho8990 yucho8990 4096 Nov  8 10:13 ..
 -rwxrwxrwx 1 yucho8990 yucho8990    0 Nov  8 10:14 empty.txt]
 ```
-
-### 5-5. 파일 내용 작성 및 확인
-
+#### 5.5.5  파일 내용 작성 및 확인
 ```bash
 $ echo "hello terminal" > TestDir/hello.txt
 $ cat TestDir/hello.txt
 [hello terminal]
 ```
-
-### 5-6. 파일 복사
-
+#### 5.5.6  파일 복사
 ```bash
 $ cp TestDir/hello.txt TestDir/hello-copy.txt
 $ ls -la TestDir
@@ -176,9 +197,7 @@ drwxrwxrwx 1 yucho8990 yucho8990 4096 Nov  8 10:13 ..
 -rwxrwxrwx 1 yucho8990 yucho8990   15 Nov  8 10:18 hello-copy.txt
 -rwxrwxrwx 1 yucho8990 yucho8990   15 Nov  8 10:17 hello.txt]
 ```
-
-### 5-7. 파일 이동 및 이름 변경
-
+#### 5.5.7 파일 이동 및 이름 변경
 ```bash
 $ mv TestDir/hello-copy.txt TestDir/renamed.txt
 $ ls -la TestDir
@@ -188,9 +207,7 @@ drwxrwxrwx 1 yucho8990 yucho8990 4096 Nov  8 10:13 ..
 -rwxrwxrwx 1 yucho8990 yucho8990   15 Nov  8 10:17 hello.txt
 -rwxrwxrwx 1 yucho8990 yucho8990   15 Nov  8 10:18 renamed.txt]
 ```
-
-### 5-8. 파일 삭제
-
+#### 5.5.8 파일 삭제
 ```bash
 $ rm TestDir/renamed.txt
 $ ls -la TestDir
@@ -201,41 +218,25 @@ drwxrwxrwx 1 yucho8990 yucho8990 4096 Nov  8 10:13 ..
 -rwxrwxrwx 1 yucho8990 yucho8990   15 Nov  8 10:17 hello.txt
 -rwxrwxrwx 1 yucho8990 yucho8990   15 Nov  8 10:18 renamed.txt]
 ```
+#### 5.5.9 절대 경로와 상대 경로 정리
 
----
-
-## 6. 절대 경로와 상대 경로 정리
-
-### 절대 경로
-
+##### 절대 경로
 절대 경로는 루트 디렉토리부터 시작하는 전체 경로입니다.
-
 예시:
-
 ```text
-/E1-1/site/index.html
+/mnt/d/codyssey_01/codyssey_public/E1-1/README.md
 ```
 현재 위치와 관계없이 항상 같은 위치를 가리킵니다.
-
-### 상대 경로
-
+##### 상대 경로
 상대 경로는 현재 작업 중인 디렉토리를 기준으로 표현하는 경로입니다.
-
 예시:
-
 ```text
-./site/index.html
-../README.md
+yucho8990@GNIA-C202-F06:/mnt/d/codyssey_01/codyssey_public$ cat ./E1-1/README.md
 ```
-
 현재 위치가 바뀌면 같은 상대 경로라도 다른 파일을 가리킬 수 있습니다.
 
----
-
-## 7. 파일 및 디렉토리 권한 실습
-
-### 7-1. 실습 파일 생성
-
+#### 5.5.10 파일 및 디렉토리 권한 실습
+####  실습 파일 생성
 ```bash
 $ mkdir -p permissionsDir
 $ echo "permission test" > permissionsDir/file.txt
@@ -247,8 +248,7 @@ Mode                 LastWriteTime         Length Name
 ----                 -------------         ------ ----                                                                                                                                                  
 -a----      2026-11-08  오전 11:55             36 file.txt]
 ```
-
-### 7-2. 파일 권한 변경 전/후 비교
+#### 파일 권한 변경 전/후 비교 (트러블 발생)
 
 ```bash
 $ chmod 644 permissionsDir/file.txt
@@ -259,9 +259,10 @@ $ chmod 755 permissionsDir/file.txt
 $ ls -l permissionsDir/file.txt
 [-rwxrwxrwx 1 yucho8990 yucho8990 36 Nov  8 11:55 permissionsDir/file.txt]
 ```
-윈도우 os와 리눅스 명령어 사이의 호환문제 때문에 결과를 볼수 없었다. 
------
- ==(트러블 슈팅)홈디렉토리로 이동하여 재작업 하였음==
+**가장 흔한 이유는 그 파일이 리눅스 권한을 제대로 지원하지 않는 파일시스템 위에 있기 때문**
+**윈도우 os와 리눅스 명령어 사이의 호환문제 때문에 결과를 볼 수 없었다. **
+
+ ==(트러블 슈팅) 홈디렉토리로 이동하여 재작업 하였음==
 ``` bash
 $ cd ~
 $ touch test.txt
@@ -273,8 +274,7 @@ $ chmod 755 test.txt
 $ ls -l test.txt 
 [-rwxr-xr-x 1 yucho8990 yucho8990 0 Nov  8 12:18 test.txt]
 ```
-
-### 7-3. 디렉토리 권한 변경 전/후 비교
+디렉토리 권한 변경 전/후 비교
 ==역시 os 충돌 문제로 홈디렉토리에서 작업하였음.==
 ```bash
 $ cd ~
@@ -290,15 +290,13 @@ $ chmod 700 testDir
 $ ls -ld testDir
 [drwx------ 2 yucho8990 yucho8990 4096 Nov  8 12:35 testDir]
 ```
+**홈으로 옮기니까 되는 이유는 파일시스템이 달라졌기 때문, 홈 디렉토리는 WSL 안의 리눅스 파일시스템이라서**
 
-### 7-4. 권한 의미 정리
-
+ 권한 의미 정리
 Linux/Unix 계열 파일 권한은 다음 세 그룹으로 나뉩니다.
-
 ```text
 소유자(owner) / 그룹(group) / 기타 사용자(others)
 ```
-
 권한 문자의 의미는 다음과 같습니다.
 
 | 권한 | 의미 |
@@ -314,20 +312,18 @@ Linux/Unix 계열 파일 권한은 다음 세 그룹으로 나뉩니다.
 | 4 | 읽기 |
 | 2 | 쓰기 |
 | 1 | 실행 |
-
 예시:
 
-| 권한 | 의미 |
-|---|---|
+| 권한  | 의미                          |
+| --- | --------------------------- |
 | 755 | 소유자 rwx, 그룹 r-x, 기타 사용자 r-x |
 | 644 | 소유자 rw-, 그룹 r--, 기타 사용자 r-- |
 | 700 | 소유자 rwx, 그룹 ---, 기타 사용자 --- |
-
 디렉토리에서 `x` 권한은 해당 디렉토리 안으로 접근할 수 있는 권한을 의미합니다.
 
 ---
 
-## 8. Docker 설치 및 기본 점검
+## 6. Docker 설치 및 기본 점검
 
 ### 8-1. Docker 버전 확인
 
