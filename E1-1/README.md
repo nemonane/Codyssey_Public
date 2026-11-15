@@ -81,7 +81,7 @@ $ git --version
 
 ```bash
 $ sudo apt update
-  sudo install tree
+  sudo apt install tree
   tree
 ```
 
