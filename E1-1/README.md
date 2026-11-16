@@ -157,6 +157,25 @@ Receiving objects: 100% (107/107), 5.84 MiB | 16.70 MiB/s, done.
 Resolving deltas: 100% (40/40), done.]
 ```
 
+```bash
+$ git pull
+  > 이 때 **`.git` 폴더가 있는 저장소 안에서만** 실행해야 한다. 
+```
+- GitHub에 올리기
+```
+$ git status  --현재 Git 저장소의 상태를 확인하는 명령
+$ git add -A  --저장소 전체 변경사항 추가
+$ git commit -m "update~ "
+$ git push
+```
+
+- 참고) # `git add .` 와 `git add -A` 차이
+
+| 명령           | 의미                                    |
+| ------------ | ------------------------------------- |
+| `git add .`  | 현재 폴더 기준으로 변경사항 추가                    |
+| `git add -A` | 저장소 전체 변경사항 추가                        |
+| `git add -u` | 이미 Git이 추적 중인 파일의 수정/삭제만 추가, 새 파일은 제외 |
 ### 5.5 터미널 기본 조작 수행
 #### 5.5.1 현재 위치 확인
 ```bash
